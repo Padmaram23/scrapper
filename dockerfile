@@ -28,4 +28,4 @@ RUN chmod +x /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver-linux64/chrome
 RUN ln -fs /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
 
 RUN  mkdir -p /home/airflow/.cache/selenium 
-RUN chmod -R 755 /home/airflow/.cache/selenium 
+RUN chmod -R 777 /home/airflow/.cache/selenium 
