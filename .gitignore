@@ -1,0 +1,5 @@
+.env
+venv
+/logs/dag_*
+/logs/scheduler
+__pycache__
