@@ -1,3 +1,4 @@
 selenium==4.11.2
 webdriver-manager==3.5.3
 mysql-connector-python
+influxdb_client==1.38.0
