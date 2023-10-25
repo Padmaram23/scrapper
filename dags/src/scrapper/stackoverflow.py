@@ -1,6 +1,6 @@
 from src.constants.endpoint_urls import Endpoints
 from src.enum.time_period import Duration
-from dags.src.interface.grabber import Grab
+from src.interface.grabber import Grab
 from src.utils import helper_function
 from src.utils.chrome_initiator import Browser
 from src.utils.extracted_data import RawData
