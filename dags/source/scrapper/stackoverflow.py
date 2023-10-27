@@ -1,10 +1,10 @@
-from src.constants.endpoint_urls import Endpoints
-from src.enum.time_period import Duration
-from src.interface.grabber import Grab
-from src.utils import helper_function
-from src.utils.chrome_initiator import Browser
-from src.utils.extracted_data import RawData
-from src.storage.influx_db import InfluxDB
+from source.constants.endpoint_urls import Endpoints
+from source.enum.time_period import Duration
+from source.interface.grabber import Grab
+from source.utils import helper_function
+from source.utils.chrome_initiator import Browser
+from source.utils.extracted_data import RawData
+from source.storage.influx_db import InfluxDB
 
 
 class ScrapingDataFromStackOverFlow(Grab):
@@ -17,7 +17,7 @@ class ScrapingDataFromStackOverFlow(Grab):
     def execute_scraping(self):
         # can write your own function depending upon your website
         # In the parameter can specify the number of pages you want to scrap form the website
-        self.__stack_scraping(1)
+        self.__stack_scraping(5)
 
     def __extract_data_from_page(self, url):
         try:

@@ -4,7 +4,7 @@ from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from datetime import datetime,timedelta
 from scraper.constant import transformed_data_insert_query,url_list
 from scraper.upwork_scraper import main
-from src.scrapper.stackoverflow import ScrapingDataFromStackOverFlow
+from source.scrapper.stackoverflow import ScrapingDataFromStackOverFlow
     	
 def scrape_all_pages(arguments):
 	for data in arguments:
@@ -48,5 +48,4 @@ with DAG(
 		provide_context=True
 
 	)
-	scraping_data_from_stack_overflow
-	scraper >> transformed_data_insert
+	scraping_data_from_stack_overflow >> scraper >> transformed_data_insert

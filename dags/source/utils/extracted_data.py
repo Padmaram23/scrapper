@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from src.interface.data_from_driver import DataFromDriver
+from source.interface.data_from_driver import DataFromDriver
 
 
 class RawData(DataFromDriver):
