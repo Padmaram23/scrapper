@@ -3,3 +3,6 @@ venv
 /logs/dag_*
 /logs/scheduler
 __pycache__
+.vscode/settings.json
+grafana-storage
+influxdb-storage

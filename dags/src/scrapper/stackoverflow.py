@@ -17,7 +17,7 @@ class ScrapingDataFromStackOverFlow(Grab):
     def execute_scraping(self):
         # can write your own function depending upon your website
         # In the parameter can specify the number of pages you want to scrap form the website
-        self.__stack_scraping(1)
+        self.__stack_scraping(5)
 
     def __extract_data_from_page(self, url):
         try:
@@ -40,10 +40,14 @@ class ScrapingDataFromStackOverFlow(Grab):
                 for rate in time_scope_of_question:
                     time_frame = rate.text.upper()
                     count = helper_function.separate_number(time_frame)
-                    if Duration.TODAY.name in time_frame:
+                    if Duration.TODAY.name in time_frame :
                         today = count
-                    elif Duration.WEEK.name in time_frame:
+                    elif Duration.WEEK.name in time_frame :
                         week = count
+                    elif Duration.MONTH.name in time_frame :
+                        month = count
+                    elif Duration.YEAR.name in time_frame :
+                        year = count
 
                 self.data_list.append({
                     "measurement": tag_name,
@@ -51,6 +55,8 @@ class ScrapingDataFromStackOverFlow(Grab):
                         "no_of_questions": no_of_questions,
                         "today": today,
                         "week": week,
+                        "month":month,
+                        "year":year
                     }
                 })
 

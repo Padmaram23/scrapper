@@ -5,7 +5,7 @@ from datetime import datetime,timedelta
 from scraper.constant import transformed_data_insert_query,url_list
 from scraper.upwork_scraper import main
 from src.scrapper.stackoverflow import ScrapingDataFromStackOverFlow
-    	
+
 def scrape_all_pages(arguments):
 	for data in arguments:
 		try:
@@ -22,25 +22,22 @@ def stack_overflow():
 	storage.execute_scraping()
     
 
-with DAG(
-    dag_id='upwork_scrape_prod',
-    schedule_interval=timedelta(days=1),
-    start_date=datetime(2023,10,19)
-     ) as dag :
+default_args = {
+    'owner': 'stack_overflow',
+    'depends_on_past': False,
+    'start_date': datetime(2023, 10, 25, 13, 0),
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
 
-	scraper = PythonOperator(
-		task_id='scraper',
-		python_callable=scrape_all_pages,
-		op_args=[url_list],
-		dag=dag
-	)
-	
-	transformed_data_insert = SQLExecuteQueryOperator(
-		task_id='transformed_data_insert',
-		conn_id='upwork_prod_db',
-		sql=transformed_data_insert_query,
-		dag=dag
-	)
+with DAG(
+	dag_id="stack_overflow",
+    default_args=default_args,
+    description='DAG to run a task daily at 6:30 PM',
+    schedule_interval='0 13 * * *',  # Schedule to run at 1 PM UTC time
+    catchup=False,  # Prevent backfilling of previous dates
+    max_active_runs=1,	
+     ) as dag :
 
 	scraping_data_from_stack_overflow = PythonOperator(
 		task_id = 'stack_overflow',
@@ -49,4 +46,3 @@ with DAG(
 
 	)
 	scraping_data_from_stack_overflow
-	scraper >> transformed_data_insert
